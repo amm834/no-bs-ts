@@ -32,5 +32,4 @@ const co = makeCoordinate(1, 2, 3);
 
 console.log(co);
 
-const reallyConst= [1, 2, 3] as const;
-
+const reallyConst = [1, 2, 3] as const;
