@@ -27,7 +27,7 @@ class InMemoreyDatabase implements Database {
 
 
 class PersistableDatabase extends InMemoreyDatabase implements Persistable {
-    restroreFromString(): string {
+    restoreFromString(): string {
         return JSON.parse(this.db as unknown as string);
     }
 
@@ -47,5 +47,5 @@ pdb.set("foo", "bar");
 console.log(pdb.get("foo"));
 const saved = pdb.saveAsString({name: "mg mg"} as unknown as string);
 console.log(saved);
-const restored = pdb.restroreFromString();
+const restored = pdb.restoreFromString();
 console.log(restored);
