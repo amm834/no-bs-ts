@@ -1,5 +1,5 @@
 import './App.css'
-import {FC, PropsWithChildren, useCallback} from "react";
+import {FC, PropsWithChildren, useCallback, useEffect, useState} from "react";
 
 interface IHeader {
     title: string
@@ -25,11 +25,29 @@ const List = ({items, onClick}: { items: string[], onClick?: (item: string) => v
     </ul>
 }
 
+const Name = ({name}: IUser) => {
+    return <div>{name}</div>
+}
+
+interface IUser {
+    name: string
+}
+
 function App() {
+
+    const [name, setName] = useState<IUser | null>(null)
+
+    useEffect(() => {
+        fetch('/data.json')
+            .then(response => response.json())
+            .then(data => setName(data))
+    }, [])
+
 
     const onListItemClick = useCallback((item: string) => {
         alert(item)
     }, [])
+
 
     return (
         <div className="App">
@@ -38,6 +56,8 @@ function App() {
                 Hello from body children
             </Body>
             <List items={['item 1', 'item 2', 'item 3']} onClick={onListItemClick}/>
+
+            {name && <Name name={name?.name}/>}
         </div>
     )
 }
