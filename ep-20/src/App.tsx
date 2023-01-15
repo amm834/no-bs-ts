@@ -1,5 +1,15 @@
 import './App.css'
-import React, {FC, PropsWithChildren, useCallback, useEffect, useReducer, useRef, useState} from "react";
+import React, {
+    ButtonHTMLAttributes,
+    DetailedHTMLProps,
+    FC,
+    PropsWithChildren,
+    useCallback,
+    useEffect,
+    useReducer,
+    useRef,
+    useState
+} from "react";
 
 interface IHeader {
     title: string
@@ -54,12 +64,28 @@ const Counter: FC<{
 }
 
 
+const useNumber = (initialValue: number) => useState(initialValue);
+type TUseNumber = ReturnType<typeof useNumber>
+
+
+const Button: FC<PropsWithChildren<
+    DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+    & { title: string }>> = ({
+                                 children,
+                                 title,
+                                 ...rest
+                             }) => {
+    return <button {...rest}>{title ?? children}</button>
+}
+
 function App() {
 
     const [name, setName] = useState<IUser | null>(null)
     const todoRef = useRef<HTMLInputElement>(null);
 
     const [count, setCount] = useState<number>(0);
+
+    const [num, setNum] = useNumber(0)
 
 
     useEffect(() => {
@@ -119,6 +145,9 @@ function App() {
 
             <Counter count={count} setCount={setCount}/>
 
+            <Button title="Hello world">
+                Hello
+            </Button>
         </div>
     )
 }
