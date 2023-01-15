@@ -56,7 +56,9 @@ function App() {
         name: string,
         done: boolean
     }
-    type TActionTypes = { type: "ADD" | "REMOVE", payload: TTodo }
+
+    type TType = "ADD" | "REMOVE"
+    type TActionTypes = { type: TType | "REMOVE", payload: TTodo }
 
 
     const [todos, dispatch] = useReducer((state: TTodo[], action: TActionTypes) => {
