@@ -1,5 +1,5 @@
 import './App.css'
-import {FC, PropsWithChildren, useCallback, useEffect, useReducer, useRef, useState} from "react";
+import React, {FC, PropsWithChildren, useCallback, useEffect, useReducer, useRef, useState} from "react";
 
 interface IHeader {
     title: string
@@ -33,9 +33,34 @@ interface IUser {
     name: string
 }
 
+
+type TTodo = {
+    id: number,
+    name: string,
+    done: boolean
+}
+
+
+type TType = "ADD" | "REMOVE"
+
+type TActionTypes = { type: TType | "REMOVE", payload: TTodo }
+
+
+const Counter: FC<{
+    count: number;
+    setCount: (count: number) => void;
+}> = ({count, setCount}) => {
+    return <button onClick={() => setCount(count + 1)}>Counter - {count}</button>
+}
+
+
 function App() {
 
     const [name, setName] = useState<IUser | null>(null)
+    const todoRef = useRef<HTMLInputElement>(null);
+
+    const [count, setCount] = useState<number>(0);
+
 
     useEffect(() => {
         fetch('/data.json')
@@ -43,23 +68,9 @@ function App() {
             .then(data => setName(data))
     }, [])
 
-
     const onListItemClick = useCallback((item: string) => {
         alert(item)
     }, [])
-
-
-    let todoRef = useRef<HTMLInputElement>(null);
-
-    type TTodo = {
-        id: number,
-        name: string,
-        done: boolean
-    }
-
-    type TType = "ADD" | "REMOVE"
-    type TActionTypes = { type: TType | "REMOVE", payload: TTodo }
-
 
     const [todos, dispatch] = useReducer((state: TTodo[], action: TActionTypes) => {
         switch (action.type) {
@@ -92,10 +103,10 @@ function App() {
             <Body>
                 Hello from body children
             </Body>
+
             <List items={['item 1', 'item 2', 'item 3']} onClick={onListItemClick}/>
 
             {name && <Name name={name?.name}/>}
-
 
             <div>
                 <h1>Todo</h1>
@@ -105,6 +116,9 @@ function App() {
                     <button onClick={() => onRemoveTodo(todo)}>Remove</button>
                 </li>)}</ul>
             </div>
+
+            <Counter count={count} setCount={setCount}/>
+
         </div>
     )
 }
