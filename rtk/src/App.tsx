@@ -22,10 +22,6 @@ function App() {
         }))
     }
 
-    function onTodoDelete(todo: ITodo) {
-        dispatch(removeTodo(todo))
-    }
-
     return (
         <div className="App">
             <input type="text" ref={inputRef}/>
@@ -35,7 +31,8 @@ function App() {
                 return (
                     <li key={todo.id}>
                         <span>{todo.title}</span>
-                        <button onClick={() => onTodoDelete(todo)}>Delete</button>
+                        <button onClick={() => dispatch(removeTodo(todo))}>Delete
+                        </button>
                     </li>
                 )
             }}/>
