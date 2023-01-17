@@ -5,3 +5,4 @@ type MyGenericType<TData> = {
 type Example1 = MyGenericType<{
     name: string;
 }>
+
