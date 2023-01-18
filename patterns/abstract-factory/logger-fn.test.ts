@@ -1,4 +1,4 @@
-import { createLogger } from "./logger-fn";
+import {createLogger} from "./logger-fn";
 
 const logger = createLogger();
 logger.info("info");

@@ -1,11 +1,14 @@
 interface ILogger {
     info(message: string): void;
+
     error(message: string): void;
+
     warn(message: string): void;
+
     debug(message: string): void;
 }
 
-const devlopmentLogger = (): ILogger => ({
+const developmentLogger = (): ILogger => ({
     warn(message: string): void {
         console.warn(message);
     },
@@ -42,6 +45,6 @@ export const createLogger = (): ILogger => {
     if (process.env.NODE_ENV === 'production') {
         return productionLogger();
     } else {
-        return devlopmentLogger();
+        return developmentLogger();
     }
 }
