@@ -2,5 +2,6 @@
     "editor.minimap.maxColumn": 0,
     "editor.fontFamily": "'Jetbrains Mono'",
     "files.autoSave": "afterDelay",
-    "editor.mouseWheelZoom": true
+    "editor.mouseWheelZoom": true,
+    "typescript.tsdk": "node_modules/typescript/lib"
 }
