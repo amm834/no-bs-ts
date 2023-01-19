@@ -46,5 +46,5 @@ export const createLogger = (): ILogger => {
         return productionLogger();
     } else {
         return developmentLogger();
-    }
+       }
 }

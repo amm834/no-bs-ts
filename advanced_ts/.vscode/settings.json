@@ -1,3 +1,6 @@
 {
-    "editor.minimap.maxColumn": 0
+    "editor.minimap.maxColumn": 0,
+    "editor.fontFamily": "'Jetbrains Mono'",
+    "files.autoSave": "afterDelay",
+    "editor.mouseWheelZoom": true
 }
